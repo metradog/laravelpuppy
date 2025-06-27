@@ -21,6 +21,7 @@
                 </div>
          @endif
         <!-- Mostrar errores de validación -->
+        
         <!-- Mostrar errores de validación -->
         @if ($errors->any())
         <div class="alert p-3 mb-2 bg-danger text-white alert-dismissible fade show" role="alert">
@@ -63,7 +64,7 @@
                                             <i class="fas fa-edit"></i>
                                             </a>
                                             &nbsp;&nbsp;
-                                            <a class="btn btn-outline-danger"  href="javascript:void(0);" onclick="confirmarSweet('¿Realmente desea eliminar este registro?', ' ');">
+                                            <a class="btn btn-outline-danger"  href="javascript:void(0);" onclick="confirmarSweet('¿Realmente desea eliminar este registro?', '{{ route('equipos_eliminar', ['id'=>$dato->id]) }}');">
                                             <i class="fas fa-trash"></i>
                                             </a>
                                         </td>

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Equipos; // Asegúrate de importar el modelo Equipos
+use App\Models\Equipos; 
+use App\Models\Jugadores; 
 
 class EquiposController extends Controller
 {
@@ -45,6 +46,21 @@ class EquiposController extends Controller
         }
     }
 
-
+    public function equipos_eliminar(Request $request, $id)
+    {
+        $datos=Equipos::where(['id'=>$id])->firstOrFail();
+        $existe=Jugadores::where(['equipos_id'=>$id])->count();
+        if($existe==0)
+        {
+            Equipos::where(['id'=>$id])->delete();
+            $request->session()->put('css', 'success');
+            $request->session()->put('mensaje', 'Se eliminó el registro exitosamente');
+        }else
+        {
+            $request->session()->put("css", "danger");
+            $request->session()->put("mensaje", "No se pudo eliminar el registro");
+        }
+        return redirect()->route('equipos_index');
+    }
     
 }
