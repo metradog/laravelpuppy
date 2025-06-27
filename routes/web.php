@@ -17,6 +17,7 @@ Route::get('/salir', [LoginController::class, 'login_salir'])->name('login_salir
 // Equipos routes
 Route::get('/equipos', [App\Http\Controllers\EquiposController::class, 'equipos_index'])->name('equipos_index')->middleware(Acceso::class);
 Route::post('/equipos', [App\Http\Controllers\EquiposController::class, 'equipos_index_post'])->name('equipos_index_post')->middleware(Acceso::class);
+Route::get('/equipos/eliminar/{id}', [App\Http\Controllers\EquiposController::class, 'equipos_eliminar'])->name('equipos_eliminar')->middleware(Acceso::class);
 
 // Jugadores routes
 Route::get('/jugadores', [App\Http\Controllers\JugadoresController::class, 'jugadores_index'])->name('jugadores_index')->middleware(Acceso::class);
