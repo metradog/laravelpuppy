@@ -33,7 +33,9 @@ class EquiposController extends Controller
             $save->nombre=$request->nombre;
             $save->save();
 
-            return redirect()->route('equipos_index');
+            return redirect()->route('equipos_index')
+                ->with('css', 'success')
+                ->with('mensaje', 'Se creó el registro Equipo exitosamente');
         }
 
         if($request->input('accion')=="2")
@@ -42,25 +44,27 @@ class EquiposController extends Controller
             $save->nombre=$request->nombre;
             $save->save();
 
-            return redirect()->route('equipos_index');
+            return redirect()->route('equipos_index')
+                ->with('css', 'success')
+                ->with('mensaje', 'Se modificó el registro Equipo exitosamente');
         }
     }
 
     public function equipos_eliminar(Request $request, $id)
     {
-        $datos=Equipos::where(['id'=>$id])->firstOrFail();
-        $existe=Jugadores::where(['equipos_id'=>$id])->count();
-        if($existe==0)
-        {
+        $datos = Equipos::where(['id'=>$id])->firstOrFail();
+        $existe = Jugadores::where(['equipos_id'=>$id])->count();
+        if ($existe == 0) {
             Equipos::where(['id'=>$id])->delete();
-            $request->session()->put('css', 'success');
-            $request->session()->put('mensaje', 'Se eliminó el registro exitosamente');
-        }else
-        {
-            $request->session()->put("css", "danger");
-            $request->session()->put("mensaje", "No se pudo eliminar el registro");
+            return redirect()->route('equipos_index')
+                ->with('css', 'success')
+                ->with('mensaje', 'Se eliminó el registro exitosamente');
+        } else {
+            return redirect()->route('equipos_index')
+                ->with('css', 'danger')
+                ->with('mensaje', 'No se pudo eliminar el registro');
         }
-        return redirect()->route('equipos_index');
     }
     
 }
+// End of EquiposController.php

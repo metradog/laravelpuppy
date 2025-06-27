@@ -15,11 +15,12 @@
         <h1 class="h3 mb-3">Equipos </h1>
         <!-- Mostrar errores de validación -->
         @if(Session::has('mensaje')) 
-                <div class="alert alert-{{ Session::get('css') }} alert-dismissible fade show" role="alert">
-                    {{ Session::get('mensaje') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-         @endif
+            <div class="alert alert-{{ Session::get('css') }} alert-dismissible fade show" role="alert">
+                {{ Session::get('mensaje') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {{ Session::forget('mensaje','css') }}
+        @endif
         <!-- Mostrar errores de validación -->
         
         <!-- Mostrar errores de validación -->
